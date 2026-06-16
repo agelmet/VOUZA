@@ -24,6 +24,8 @@
   --brass:#c8a45c;
   --brass-soft:#d9bd84;
   --paper:#fbf9f3;
+  --grey-light:#e4e9ea;
+  --grey-mid:#8a9a9c;
   --line:rgba(13,74,82,.16);
   --shadow:0 24px 60px -30px rgba(7,46,52,.5);
   --serif:'Fraunces',serif;
@@ -110,21 +112,19 @@ header.scrolled{
 .nav{display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:13px;cursor:pointer}
 .brand .mark{
-  width:46px;height:46px;border-radius:50%;
-  background:var(--ivory);
-  border:1.5px solid var(--brass);
+  width:75px; /* BIGGER LOGO */
+  height:auto;
   display:flex;align-items:center;justify-content:center;
-  overflow:hidden;flex-shrink:0;
+  overflow:visible;flex-shrink:0;
   transition:transform .4s ease;
 }
-.brand:hover .mark{transform:rotate(-8deg)}
-.brand .mark img{width:100%;height:100%;object-fit:contain;padding:3px}
+.brand:hover .mark{transform:rotate(-4deg) scale(1.05)}
+.brand .mark img{width:100%;height:100%;object-fit:contain}
 .brand .btxt{line-height:1.15}
-.brand .btxt b{font-family:var(--display);font-size:1.18rem;font-weight:600;letter-spacing:.02em;display:block;color:var(--petrol-deep);transition:color .4s}
-.brand .btxt span{font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:500}
+.brand .btxt b{font-family:var(--display);font-size:1.25rem;font-weight:600;letter-spacing:.02em;display:block;color:var(--petrol-deep);transition:color .4s}
+.brand .btxt span{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:500}
 header:not(.scrolled) .brand .btxt b{color:var(--ivory)}
 header:not(.scrolled) .brand .btxt span{color:var(--brass-soft)}
-header:not(.scrolled) .brand .mark{background:rgba(246,242,233,.12)}
 
 .menu{display:flex;align-items:center;gap:34px}
 .menu a{
@@ -234,12 +234,12 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .btn svg{width:16px;height:16px}
 .hero-portrait{position:relative}
 .hero-portrait .frame{
-  position:relative;border-radius:200px 200px 24px 24px;overflow:hidden;
+  position:relative;border-radius:24px;overflow:hidden;
   box-shadow:0 40px 80px -30px rgba(0,0,0,.6);
   border:1px solid rgba(200,164,92,.3);
-  aspect-ratio:3/3.7;
+  /* True to size - removed aspect-ratio */
 }
-.hero-portrait .frame img{width:100%;height:100%;object-fit:cover;object-position:center 18%;cursor:zoom-in}
+.hero-portrait .frame img{width:100%;height:auto;display:block;}
 .hero-portrait .badge{
   position:absolute;bottom:24px;left:-26px;
   background:var(--ivory);border-radius:16px;padding:16px 22px;
@@ -273,11 +273,12 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .sec-head p{color:var(--ink-soft);font-size:1.05rem;font-weight:300}
 
 /* ABOUT */
-#about{background:var(--paper)}
+#about{background:var(--grey-light)} /* Sophisticated Grey Update */
 .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
 .about-photo{position:relative}
-.about-photo .pic{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:3/3.9}
-.about-photo .pic img{width:100%;height:100%;object-fit:cover;object-position:center 20%;cursor:zoom-in}
+.about-photo .pic{border-radius:24px;overflow:hidden;box-shadow:var(--shadow);}
+/* True to size - removed aspect-ratio */
+.about-photo .pic img{width:100%;height:auto;display:block;}
 .about-photo .deco{
   position:absolute;top:-22px;right:-22px;width:120px;height:120px;z-index:-1;
   border:1px solid var(--brass);border-radius:50%;opacity:.5;
@@ -285,33 +286,63 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .about-text h3{font-family:var(--display);font-size:1.7rem;color:var(--petrol-deep);font-weight:600;margin-bottom:18px;font-style:italic}
 .about-text p{margin-bottom:20px;color:var(--ink-soft)}
 .about-text p strong{color:var(--petrol-deep);font-weight:600}
-.exp-list{margin-top:34px;display:grid;gap:2px;border-top:1px solid var(--line)}
-.exp-item{display:flex;gap:22px;padding:20px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.exp-list{margin-top:34px;display:grid;gap:2px;border-top:1px solid var(--grey-mid)}
+.exp-item{display:flex;gap:22px;padding:20px 0;border-bottom:1px solid var(--grey-mid);align-items:baseline}
 .exp-item .place{font-family:var(--display);font-size:1.15rem;color:var(--petrol-deep);font-weight:600;min-width:130px;font-style:italic}
 .exp-item .det{font-size:.92rem;color:var(--ink-soft)}
 
-/* SERVICES */
+/* SERVICES - REDESIGNED CARDS */
 #services{background:var(--ivory)}
-.svc-grid{display:grid;gap:0;border-top:1px solid var(--line)}
-.svc{
-  border-bottom:1px solid var(--line);
-  cursor:pointer;transition:background .4s;
+.svc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+  gap:32px;
 }
-.svc:hover{background:var(--paper)}
-.svc-head{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:30px 0}
-.svc-num{font-family:var(--display);font-size:1.5rem;color:var(--brass);font-style:italic;font-weight:600;min-width:42px}
-.svc-title{font-family:var(--display);font-size:clamp(1.4rem,2.6vw,1.9rem);color:var(--petrol-deep);font-weight:500;letter-spacing:-.01em}
-.svc-icon{width:42px;height:42px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:50%;transition:.4s}
-.svc:hover .svc-icon{background:var(--teal);border-color:var(--teal)}
-.svc-icon svg{width:18px;height:18px;stroke:var(--teal);transition:.4s}
-.svc:hover .svc-icon svg{stroke:#fff;transform:rotate(180deg)}
-.svc-body{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1)}
-.svc.open .svc-body{max-height:420px}
-.svc-body-inner{padding:0 0 34px 70px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px}
-.svc-body-inner p{color:var(--ink-soft);margin-bottom:18px}
-.svc-tags{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
-.svc-tags span{font-size:.74rem;padding:7px 14px;border-radius:30px;background:var(--ivory-warm);color:var(--petrol);font-weight:500;border:1px solid var(--line)}
+.svc{
+  background:var(--paper);
+  border:1px solid var(--grey-light);
+  border-radius:24px;
+  padding:46px 36px;
+  transition:all .5s cubic-bezier(.2,.8,.2,1);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.svc::before{
+  content:"";position:absolute;top:0;left:0;width:100%;height:5px;
+  background:linear-gradient(90deg, var(--teal), var(--petrol-deep));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.svc:hover{
+  transform:translateY(-12px);
+  box-shadow:0 30px 60px -20px rgba(7,46,52,.12);
+  background:#fff;
+  border-color:transparent;
+}
+.svc:hover::before{transform:scaleX(1)}
+.svc-head{margin-bottom:24px}
+.svc-num{
+  font-family:var(--display);font-size:3.2rem;
+  color:var(--grey-light);font-style:italic;font-weight:600;
+  line-height:1;margin-bottom:18px;transition:color .5s;
+}
 .svc:hover .svc-num{color:var(--teal)}
+.svc-title{
+  font-family:var(--display);font-size:1.7rem;
+  color:var(--petrol-deep);font-weight:600;letter-spacing:-.01em;line-height:1.2;
+}
+.svc-body{flex:1;display:flex;flex-direction:column;}
+.svc-body-inner{display:flex;flex-direction:column;gap:24px;flex:1;}
+.svc-body-inner p{color:var(--ink-soft);font-size:0.96rem;line-height:1.6;flex:1;}
+.svc-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.svc-tags span{
+  font-size:.74rem;padding:6px 14px;border-radius:30px;
+  background:var(--grey-light);color:var(--ink-soft);
+  font-weight:500;border:none;transition:background .3s, color .3s;
+}
+.svc:hover .svc-tags span{background:var(--ivory-warm);color:var(--petrol-deep);}
 
 /* PHILOSOPHY */
 #philosophy{background:linear-gradient(150deg,var(--petrol-deep),var(--petrol));color:var(--ivory);overflow:hidden}
@@ -334,19 +365,26 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .phil-quote{margin-top:56px;text-align:center;font-family:var(--display);font-size:clamp(1.4rem,3vw,2.1rem);font-style:italic;color:var(--ivory);max-width:840px;margin-left:auto;margin-right:auto;line-height:1.4}
 .phil-quote::before{content:"“";color:var(--brass);font-size:2em;line-height:0;vertical-align:-.4em;margin-right:.1em}
 
-/* GALLERY */
+/* GALLERY - MASONRY FOR UNCROPPED IMAGES */
 #space{background:var(--paper)}
-.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:16px}
-.gal-item{overflow:hidden;border-radius:14px;cursor:zoom-in;position:relative;box-shadow:0 12px 30px -18px rgba(7,46,52,.4)}
-.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-.gal-item:hover img{transform:scale(1.07)}
-.gal-item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,46,52,.25),transparent 60%);opacity:0;transition:.4s}
+.gal-grid{
+  column-count: 3;
+  column-gap: 24px;
+}
+.gal-item{
+  display:inline-block;
+  width:100%;
+  margin-bottom:24px;
+  overflow:hidden;border-radius:14px;position:relative;
+  box-shadow:0 12px 30px -18px rgba(7,46,52,.4);
+}
+.gal-item img{width:100%;height:auto;display:block;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.gal-item:hover img{transform:scale(1.04)}
+.gal-item::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,46,52,.25),transparent 60%);opacity:0;transition:.4s;pointer-events:none;}
 .gal-item:hover::after{opacity:1}
-.gal-item.tall{grid-row:span 2}
-.gal-item.wide{grid-column:span 2}
 
 /* REVIEWS */
-#reviews{background:var(--ivory)}
+#reviews{background:var(--grey-light)}
 .rev-top{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:50px}
 .rev-score{display:flex;align-items:center;gap:20px}
 .rev-score .big{font-family:var(--display);font-size:4.5rem;font-weight:600;color:var(--teal);line-height:.9}
@@ -358,7 +396,7 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .rev-carousel:hover .rev-track{animation-play-state:paused}
 @keyframes revScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .rev-card{
-  width:360px;flex-shrink:0;background:var(--paper);border:1px solid var(--line);
+  width:360px;flex-shrink:0;background:var(--paper);border:1px solid var(--ivory-warm);
   border-radius:18px;padding:30px;display:flex;flex-direction:column;gap:16px;
 }
 .rev-card .rc-top{display:flex;align-items:center;justify-content:space-between}
@@ -366,7 +404,7 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .rev-card .rc-stars svg{width:14px;height:14px;fill:var(--brass)}
 .rev-card .rc-score{font-family:var(--display);font-weight:600;color:var(--teal);font-size:1.1rem}
 .rev-card p{font-size:.94rem;color:var(--ink-soft);font-weight:300;line-height:1.65;flex:1}
-.rev-card .rc-author{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.rev-card .rc-author{display:flex;align-items:center;gap:12px;border-top:1px solid var(--grey-light);padding-top:16px}
 .rev-card .rc-av{width:38px;height:38px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:600;font-size:1.1rem}
 .rev-card .rc-name{font-weight:600;font-size:.9rem;color:var(--petrol-deep)}
 .rev-card .rc-date{font-size:.74rem;color:var(--ink-soft)}
@@ -398,7 +436,7 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 footer{background:var(--petrol-deep);color:rgba(246,242,233,.6);padding:56px 0 30px;border-top:1px solid rgba(200,164,92,.15)}
 .foot-top{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;padding-bottom:34px;border-bottom:1px solid rgba(246,242,233,.1)}
 .foot-brand{display:flex;align-items:center;gap:14px}
-.foot-brand .mark{width:50px;height:50px;border-radius:50%;border:1.5px solid var(--brass);overflow:hidden;background:var(--ivory);padding:3px}
+.foot-brand .mark{width:80px;height:auto;overflow:visible;background:transparent;padding:0} /* BIGGER LOGO */
 .foot-brand .mark img{width:100%;height:100%;object-fit:contain}
 .foot-brand b{font-family:var(--display);font-size:1.3rem;color:var(--ivory);font-weight:600;display:block}
 .foot-brand span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-soft)}
@@ -410,12 +448,12 @@ footer{background:var(--petrol-deep);color:rgba(246,242,233,.6);padding:56px 0 3
 .foot-bottom a.advon:hover{color:var(--brass)}
 
 /* LIGHTBOX */
-.lightbox{position:fixed;inset:0;z-index:5000;background:rgba(7,28,31,.94);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.4s;padding:30px;backdrop-filter:blur(6px)}
+.lightbox{position:fixed;inset:0;z-index:5000;background:rgba(7,28,31,.96);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.4s;padding:30px;backdrop-filter:blur(8px)}
 .lightbox.open{opacity:1;visibility:visible}
 .lightbox img{max-width:92vw;max-height:90vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.6);transform:scale(.94);transition:transform .4s}
 .lightbox.open img{transform:scale(1)}
-.lb-close{position:absolute;top:24px;right:28px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(246,242,233,.3);background:rgba(0,0,0,.2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s}
-.lb-close:hover{background:rgba(246,242,233,.15);transform:rotate(90deg)}
+.lb-close{position:absolute;top:24px;right:28px;width:48px;height:48px;border-radius:50%;border:1px solid rgba(246,242,233,.3);background:rgba(0,0,0,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.3s}
+.lb-close:hover{background:rgba(246,242,233,.2);transform:rotate(90deg)}
 .lb-close::before,.lb-close::after{content:"";position:absolute;width:22px;height:1.5px;background:var(--ivory)}
 .lb-close::before{transform:rotate(45deg)}.lb-close::after{transform:rotate(-45deg)}
 
@@ -430,12 +468,12 @@ html[lang="en"] [data-en]{display:revert}
 /* RESPONSIVE */
 @media(max-width:980px){
   .hero-grid{grid-template-columns:1fr;gap:50px}
-  .hero-portrait{max-width:380px;margin:0 auto}
+  .hero-portrait{max-width:440px;margin:0 auto}
   .about-grid{grid-template-columns:1fr;gap:46px}
-  .about-photo{max-width:420px}
+  .about-photo{max-width:480px;margin:0 auto;}
   .phil-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr;gap:36px}
-  .svc-body-inner{grid-template-columns:1fr;gap:18px;padding-left:0}
+  .gal-grid{column-count: 2;}
 }
 @media(max-width:760px){
   .menu{display:none}
@@ -443,13 +481,11 @@ html[lang="en"] [data-en]{display:revert}
   .burger{display:flex}
   .wrap{padding:0 22px}
   .sec{padding:80px 0}
-  .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
-  .gal-item.wide{grid-column:span 2}
+  .gal-grid{column-count: 1;}
   .hero{padding:120px 0 70px}
   .hero-portrait .badge{left:0}
   .rev-top{flex-direction:column;align-items:flex-start}
   .foot-top,.foot-bottom{flex-direction:column;text-align:center;align-items:center}
-  .svc-head{grid-template-columns:auto 1fr auto;gap:16px}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.001ms!important;transition-duration:.001ms!important}
@@ -460,7 +496,6 @@ html[lang="en"] [data-en]{display:revert}
 </head>
 <body>
 
-<!-- LOADER -->
 <div id="loader">
   <div class="iris">
     <span class="ring"></span><span class="ring"></span><span class="ring"></span>
@@ -471,11 +506,10 @@ html[lang="en"] [data-en]{display:revert}
   <div class="ldr-sub" data-en>Ophthalmic Surgeon</div>
 </div>
 
-<!-- HEADER -->
 <header id="header">
   <div class="wrap nav">
     <div class="brand" onclick="document.getElementById('top').scrollIntoView()">
-      <div class="mark"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-57.jpg" alt="Λογότυπο Ασπασία Βούζα"></div>
+      <div class="mark"><img class="no-zoom" src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-57.jpg" alt="Λογότυπο Ασπασία Βούζα"></div>
       <div class="btxt">
         <b>Ασπασία Βούζα</b>
         <span data-el>Χειρουργός Οφθαλμίατρος</span>
@@ -499,7 +533,6 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </header>
 
-<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-close" onclick="toggleMenu()" aria-label="Κλείσιμο"></button>
   <a href="#about" onclick="toggleMenu()"><span data-el>Προφίλ</span><span data-en>About</span></a>
@@ -515,7 +548,6 @@ html[lang="en"] [data-en]{display:revert}
 
 <span id="top"></span>
 
-<!-- HERO -->
 <section class="hero">
   <svg class="hero-bg-rings" viewBox="0 0 760 760">
     <circle cx="380" cy="380" r="120"/><circle cx="380" cy="380" r="180"/>
@@ -549,7 +581,7 @@ html[lang="en"] [data-en]{display:revert}
     </div>
     <div class="hero-portrait">
       <div class="frame">
-        <img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/IMG_7632.jpg" alt="Ασπασία Βούζα, Χειρουργός Οφθαλμίατρος" data-zoom>
+        <img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/IMG_7632.jpg" alt="Ασπασία Βούζα, Χειρουργός Οφθαλμίατρος">
       </div>
       <div class="badge">
         <div class="num">15+</div>
@@ -560,21 +592,19 @@ html[lang="en"] [data-en]{display:revert}
   <div class="scroll-hint"><span data-el>Κυλήστε</span><span data-en>Scroll</span><span class="line"></span></div>
 </section>
 
-<!-- CREDENTIALS STRIP -->
 <div class="cred-strip">
   <div class="cred-track" id="credTrack"></div>
 </div>
 
-<!-- ABOUT -->
 <section class="sec" id="about">
   <div class="wrap">
     <div class="about-grid">
       <div class="about-photo reveal">
         <div class="deco"></div>
-        <div class="pic"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/IMG_6618.jpeg" alt="Ασπασία Βούζα" data-zoom></div>
+        <div class="pic"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/IMG_6618.jpeg" alt="Ασπασία Βούζα"></div>
       </div>
       <div class="about-text reveal">
-        <div class="eyebrow"><span data-el>Το Προφίλ</span><span data-en>The Profile</span></div>
+        <div class="eyebrow"><span data-el>Η Οφθαλμίατρος</span><span data-en>The Ophthalmologist</span></div>
         <h3 data-el>Διεθνής κλινική εμπειρία & εξειδικευμένη φροντίδα</h3>
         <h3 data-en>International clinical experience & specialised care</h3>
         <div data-el>
@@ -598,7 +628,6 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="sec" id="services">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -612,7 +641,6 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
-<!-- PHILOSOPHY -->
 <section class="sec" id="philosophy">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -647,7 +675,6 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
-<!-- GALLERY -->
 <section class="sec" id="space">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -658,15 +685,13 @@ html[lang="en"] [data-en]{display:revert}
       <p data-en>A carefully designed practice in Maroussi, equipped with modern diagnostic instruments and built to inspire calm and trust.</p>
     </div>
     <div class="gal-grid reveal">
-      <div class="gal-item tall"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-54.jpg" alt="Διαγνωστικός εξοπλισμός ιατρείου" data-zoom></div>
-      <div class="gal-item wide"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-55.jpg" alt="Πανοραμική άποψη του ιατρείου" data-zoom></div>
-      <div class="gal-item tall"><img style="object-position:center 28%" src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/IMG_6618.jpeg" alt="Ασπασία Βούζα" data-zoom></div>
-      <div class="gal-item wide"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-53.jpg" alt="Χώρος αναμονής ιατρείου" data-zoom></div>
+      <div class="gal-item"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-54.jpg" alt="Διαγνωστικός εξοπλισμός ιατρείου"></div>
+      <div class="gal-item"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-55.jpg" alt="Πανοραμική άποψη του ιατρείου"></div>
+      <div class="gal-item"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-53.jpg" alt="Χώρος αναμονής ιατρείου"></div>
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
 <section class="sec" id="reviews">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -707,7 +732,6 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="sec" id="contact">
   <div class="wrap">
     <div class="contact-grid">
@@ -742,12 +766,11 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="mark"><img src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-57.jpg" alt="Λογότυπο"></div>
+        <div class="mark"><img class="no-zoom" src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-57.jpg" alt="Λογότυπο"></div>
         <div><b>Ασπασία Βούζα</b><span data-el>Χειρουργός Οφθαλμίατρος · Μαρούσι</span><span data-en>Ophthalmic Surgeon · Maroussi</span></div>
       </div>
       <div class="foot-links">
@@ -764,7 +787,6 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </footer>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lb-close" onclick="closeLightbox()" aria-label="Κλείσιμο"></button>
   <img id="lbImg" src="" alt="">
@@ -805,7 +827,7 @@ function buildCreds(){
   document.getElementById('credTrack').innerHTML='<span>'+arr.join('</span><span>')+'</span>';
 }
 
-// ===== SERVICES =====
+// ===== SERVICES - PREMIUM CARDS =====
 const services=[
   {el:{t:'Πλήρης Οφθαλμολογικός & Διαθλαστικός Έλεγχος',p:'Η βάση για τη διατήρηση της καλής όρασης είναι η έγκαιρη και ακριβής διάγνωση. Πραγματοποιούμε πλήρη διαθλαστικό έλεγχο για τη διόρθωση μυωπίας, υπερμετρωπίας, αστιγματισμού και πρεσβυωπίας, σε ενήλικες και παιδιά. Παράλληλα, εξειδικευόμαστε σε προχωρημένες εξετάσεις όπως η ηλεκτροφυσιολογία της όρασης και η μελέτη οπτικών πεδίων, για μια ολοκληρωμένη χαρτογράφηση της οπτικής λειτουργίας.',tags:['Μυωπία & υπερμετρωπία','Αστιγματισμός','Πρεσβυωπία','Ηλεκτροφυσιολογία','Μελέτη οπτικών πεδίων']},
    en:{t:'Complete Eye & Refractive Assessment',p:'The foundation of good vision is early, accurate diagnosis. We carry out a full refractive assessment to correct myopia, hyperopia, astigmatism and presbyopia, in both adults and children. We also specialise in advanced tests such as visual electrophysiology and visual field studies, for a complete mapping of visual function.',tags:['Myopia & hyperopia','Astigmatism','Presbyopia','Electrophysiology','Visual fields']}},
@@ -820,16 +842,17 @@ function buildServices(){
   const en=document.documentElement.lang==='en';
   const g=document.getElementById('svcGrid');
   g.innerHTML=services.map((s,i)=>{const d=en?s.en:s.el;const n=String(i+1).padStart(2,'0');
-    return `<div class="svc" onclick="this.classList.toggle('open')">
+    return `<div class="svc reveal">
       <div class="svc-head">
         <div class="svc-num">${n}</div>
         <div class="svc-title">${d.t}</div>
-        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></div>
       </div>
-      <div class="svc-body"><div class="svc-body-inner">
-        <p>${d.p}</p>
-        <div class="svc-tags">${d.tags.map(t=>`<span>${t}</span>`).join('')}</div>
-      </div></div>
+      <div class="svc-body">
+        <div class="svc-body-inner">
+          <p>${d.p}</p>
+          <div class="svc-tags">${d.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+        </div>
+      </div>
     </div>`;}).join('');
 }
 
@@ -863,7 +886,14 @@ function openLightbox(src,alt){const lb=document.getElementById('lightbox');docu
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLightbox();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLightbox();const m=document.getElementById('mobileNav');if(m.classList.contains('open'))toggleMenu();}});
-function bindZoom(){document.querySelectorAll('[data-zoom]').forEach(img=>{img.style.cursor='zoom-in';img.onclick=()=>openLightbox(img.src,img.alt);});}
+
+// Global script to automatically attach zoom functionality to every non-logo image
+function bindZoom(){
+  document.querySelectorAll('img:not(.no-zoom)').forEach(img=>{
+    img.style.cursor='zoom-in';
+    img.onclick=()=>openLightbox(img.src,img.alt);
+  });
+}
 
 // ===== REVEAL =====
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
