@@ -67,28 +67,18 @@ section{position:relative}
   transition:opacity .9s ease,visibility .9s ease;
 }
 #loader.done{opacity:0;visibility:hidden}
-.iris{
-  width:120px;height:120px;border-radius:50%;
-  position:relative;
-  display:flex;align-items:center;justify-content:center;
+.loader-eye {
+  width: 90px;
+  height: 90px;
+  color: var(--brass);
+  animation: eyePulse 2.4s infinite ease-in-out;
 }
-.iris .ring{
-  position:absolute;inset:0;border-radius:50%;
-  border:1px solid rgba(200,164,92,.35);
-  animation:irisPulse 2.4s ease-in-out infinite;
+@keyframes eyePulse {
+  0%, 100% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; drop-shadow: 0 0 20px rgba(200,164,92,0.4); }
 }
-.iris .ring:nth-child(2){inset:14px;animation-delay:.3s;border-color:rgba(42,157,167,.5)}
-.iris .ring:nth-child(3){inset:28px;animation-delay:.6s;border-color:rgba(200,164,92,.5)}
-.iris .pupil{
-  width:30px;height:30px;border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,var(--teal-bright),var(--petrol-deep));
-  box-shadow:0 0 30px rgba(42,157,167,.6);
-  animation:pupilDilate 2.4s ease-in-out infinite;
-}
-@keyframes irisPulse{0%,100%{transform:scale(.92);opacity:.5}50%{transform:scale(1.05);opacity:1}}
-@keyframes pupilDilate{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
 #loader .ldr-name{
-  margin-top:34px;font-family:var(--display);font-size:1.5rem;letter-spacing:.18em;
+  margin-top:24px;font-family:var(--display);font-size:1.5rem;letter-spacing:.18em;
   color:var(--ivory);font-weight:500;opacity:0;animation:fadeUp 1s ease .4s forwards;
 }
 #loader .ldr-sub{
@@ -112,14 +102,16 @@ header.scrolled{
 .nav{display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:13px;cursor:pointer}
 .brand .mark{
-  width:75px; /* BIGGER LOGO */
-  height:auto;
+  width:65px; 
+  height:65px;
   display:flex;align-items:center;justify-content:center;
   overflow:visible;flex-shrink:0;
-  transition:transform .4s ease;
+  color: var(--ivory);
+  transition:transform .4s ease, color .4s ease;
 }
-.brand:hover .mark{transform:rotate(-4deg) scale(1.05)}
-.brand .mark img{width:100%;height:100%;object-fit:contain}
+header.scrolled .brand .mark { color: var(--petrol-deep); }
+.brand:hover .mark{transform:scale(1.08)}
+.brand .mark svg{width:100%;height:100%;}
 .brand .btxt{line-height:1.15}
 .brand .btxt b{font-family:var(--display);font-size:1.25rem;font-weight:600;letter-spacing:.02em;display:block;color:var(--petrol-deep);transition:color .4s}
 .brand .btxt span{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:500}
@@ -237,7 +229,7 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
   position:relative;border-radius:24px;overflow:hidden;
   box-shadow:0 40px 80px -30px rgba(0,0,0,.6);
   border:1px solid rgba(200,164,92,.3);
-  /* True to size - removed aspect-ratio */
+  /* True to size */
 }
 .hero-portrait .frame img{width:100%;height:auto;display:block;}
 .hero-portrait .badge{
@@ -273,11 +265,11 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .sec-head p{color:var(--ink-soft);font-size:1.05rem;font-weight:300}
 
 /* ABOUT */
-#about{background:var(--grey-light)} /* Sophisticated Grey Update */
+#about{background:var(--grey-light)} 
 .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
 .about-photo{position:relative}
 .about-photo .pic{border-radius:24px;overflow:hidden;box-shadow:var(--shadow);}
-/* True to size - removed aspect-ratio */
+/* True to size */
 .about-photo .pic img{width:100%;height:auto;display:block;}
 .about-photo .deco{
   position:absolute;top:-22px;right:-22px;width:120px;height:120px;z-index:-1;
@@ -291,11 +283,11 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .exp-item .place{font-family:var(--display);font-size:1.15rem;color:var(--petrol-deep);font-weight:600;min-width:130px;font-style:italic}
 .exp-item .det{font-size:.92rem;color:var(--ink-soft)}
 
-/* SERVICES - REDESIGNED CARDS */
+/* SERVICES - SYMMETRICAL 2x2 GRID */
 #services{background:var(--ivory)}
 .svc-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns:repeat(2, 1fr); /* Enforces perfect symmetry */
   gap:32px;
 }
 .svc{
@@ -365,16 +357,16 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 .phil-quote{margin-top:56px;text-align:center;font-family:var(--display);font-size:clamp(1.4rem,3vw,2.1rem);font-style:italic;color:var(--ivory);max-width:840px;margin-left:auto;margin-right:auto;line-height:1.4}
 .phil-quote::before{content:"“";color:var(--brass);font-size:2em;line-height:0;vertical-align:-.4em;margin-right:.1em}
 
-/* GALLERY - MASONRY FOR UNCROPPED IMAGES */
+/* GALLERY - SYMMETRICAL GRID */
 #space{background:var(--paper)}
 .gal-grid{
-  column-count: 3;
-  column-gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Perfect 3-column symmetry */
+  gap: 32px;
+  align-items: center; /* Vertically aligns uncropped images beautifully */
 }
 .gal-item{
-  display:inline-block;
   width:100%;
-  margin-bottom:24px;
   overflow:hidden;border-radius:14px;position:relative;
   box-shadow:0 12px 30px -18px rgba(7,46,52,.4);
 }
@@ -436,8 +428,13 @@ header:not(.scrolled) .burger span{background:var(--ivory)}
 footer{background:var(--petrol-deep);color:rgba(246,242,233,.6);padding:56px 0 30px;border-top:1px solid rgba(200,164,92,.15)}
 .foot-top{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;padding-bottom:34px;border-bottom:1px solid rgba(246,242,233,.1)}
 .foot-brand{display:flex;align-items:center;gap:14px}
-.foot-brand .mark{width:80px;height:auto;overflow:visible;background:transparent;padding:0} /* BIGGER LOGO */
-.foot-brand .mark img{width:100%;height:100%;object-fit:contain}
+.foot-brand .mark{
+  width:70px; 
+  height:70px;
+  color: var(--brass);
+  display:flex;align-items:center;justify-content:center;
+}
+.foot-brand .mark svg{width:100%;height:100%;}
 .foot-brand b{font-family:var(--display);font-size:1.3rem;color:var(--ivory);font-weight:600;display:block}
 .foot-brand span{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-soft)}
 .foot-links{display:flex;gap:28px;flex-wrap:wrap}
@@ -471,9 +468,10 @@ html[lang="en"] [data-en]{display:revert}
   .hero-portrait{max-width:440px;margin:0 auto}
   .about-grid{grid-template-columns:1fr;gap:46px}
   .about-photo{max-width:480px;margin:0 auto;}
+  .svc-grid{grid-template-columns:1fr;} /* Stacks beautifully symmetrically on tablet/mobile */
   .phil-grid{grid-template-columns:1fr}
   .contact-grid{grid-template-columns:1fr;gap:36px}
-  .gal-grid{column-count: 2;}
+  .gal-grid{grid-template-columns:1fr; gap: 24px;}
 }
 @media(max-width:760px){
   .menu{display:none}
@@ -481,7 +479,6 @@ html[lang="en"] [data-en]{display:revert}
   .burger{display:flex}
   .wrap{padding:0 22px}
   .sec{padding:80px 0}
-  .gal-grid{column-count: 1;}
   .hero{padding:120px 0 70px}
   .hero-portrait .badge{left:0}
   .rev-top{flex-direction:column;align-items:flex-start}
@@ -496,20 +493,33 @@ html[lang="en"] [data-en]{display:revert}
 </head>
 <body>
 
+<!-- LOADER -->
 <div id="loader">
-  <div class="iris">
-    <span class="ring"></span><span class="ring"></span><span class="ring"></span>
-    <span class="pupil"></span>
-  </div>
+  <!-- NEW GRAPHIC EYE SVG -->
+  <svg class="loader-eye" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M32 18C14 18 4 32 4 32C4 32 14 46 32 46C50 46 60 32 60 32C60 32 50 18 32 18Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="32" cy="32" r="10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="32" cy="32" r="4" fill="currentColor"/>
+    <path d="M22 22C26 19.5 30 19 36 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  </svg>
   <div class="ldr-name">Ασπασία Βούζα</div>
   <div class="ldr-sub" data-el>Χειρουργός Οφθαλμίατρος</div>
   <div class="ldr-sub" data-en>Ophthalmic Surgeon</div>
 </div>
 
+<!-- HEADER -->
 <header id="header">
   <div class="wrap nav">
     <div class="brand" onclick="document.getElementById('top').scrollIntoView()">
-      <div class="mark"><img class="no-zoom" src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-57.jpg" alt="Λογότυπο Ασπασία Βούζα"></div>
+      <div class="mark">
+        <!-- NEW GRAPHIC EYE SVG -->
+        <svg class="no-zoom" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 18C14 18 4 32 4 32C4 32 14 46 32 46C50 46 60 32 60 32C60 32 50 18 32 18Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="32" cy="32" r="10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="32" cy="32" r="4" fill="currentColor"/>
+          <path d="M22 22C26 19.5 30 19 36 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
       <div class="btxt">
         <b>Ασπασία Βούζα</b>
         <span data-el>Χειρουργός Οφθαλμίατρος</span>
@@ -533,6 +543,7 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </header>
 
+<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <button class="mobile-close" onclick="toggleMenu()" aria-label="Κλείσιμο"></button>
   <a href="#about" onclick="toggleMenu()"><span data-el>Προφίλ</span><span data-en>About</span></a>
@@ -548,6 +559,7 @@ html[lang="en"] [data-en]{display:revert}
 
 <span id="top"></span>
 
+<!-- HERO -->
 <section class="hero">
   <svg class="hero-bg-rings" viewBox="0 0 760 760">
     <circle cx="380" cy="380" r="120"/><circle cx="380" cy="380" r="180"/>
@@ -592,10 +604,12 @@ html[lang="en"] [data-en]{display:revert}
   <div class="scroll-hint"><span data-el>Κυλήστε</span><span data-en>Scroll</span><span class="line"></span></div>
 </section>
 
+<!-- CREDENTIALS STRIP -->
 <div class="cred-strip">
   <div class="cred-track" id="credTrack"></div>
 </div>
 
+<!-- ABOUT -->
 <section class="sec" id="about">
   <div class="wrap">
     <div class="about-grid">
@@ -628,6 +642,7 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
+<!-- SERVICES -->
 <section class="sec" id="services">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -641,6 +656,7 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
+<!-- PHILOSOPHY -->
 <section class="sec" id="philosophy">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -675,6 +691,7 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
+<!-- GALLERY -->
 <section class="sec" id="space">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -692,6 +709,7 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
+<!-- REVIEWS -->
 <section class="sec" id="reviews">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -732,6 +750,7 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
+<!-- CONTACT -->
 <section class="sec" id="contact">
   <div class="wrap">
     <div class="contact-grid">
@@ -766,11 +785,20 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <div class="mark"><img class="no-zoom" src="https://raw.githubusercontent.com/agelmet/VOUZA/de406714ed8d43adf3b8018b3e5c2353e0192f76/unnamed-57.jpg" alt="Λογότυπο"></div>
+        <div class="mark">
+          <!-- NEW GRAPHIC EYE SVG -->
+          <svg class="no-zoom" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 18C14 18 4 32 4 32C4 32 14 46 32 46C50 46 60 32 60 32C60 32 50 18 32 18Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="32" cy="32" r="10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="4" fill="currentColor"/>
+            <path d="M22 22C26 19.5 30 19 36 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
         <div><b>Ασπασία Βούζα</b><span data-el>Χειρουργός Οφθαλμίατρος · Μαρούσι</span><span data-en>Ophthalmic Surgeon · Maroussi</span></div>
       </div>
       <div class="foot-links">
@@ -787,6 +815,7 @@ html[lang="en"] [data-en]{display:revert}
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lb-close" onclick="closeLightbox()" aria-label="Κλείσιμο"></button>
   <img id="lbImg" src="" alt="">
@@ -827,7 +856,7 @@ function buildCreds(){
   document.getElementById('credTrack').innerHTML='<span>'+arr.join('</span><span>')+'</span>';
 }
 
-// ===== SERVICES - PREMIUM CARDS =====
+// ===== SERVICES - PREMIUM SYMMETRICAL CARDS =====
 const services=[
   {el:{t:'Πλήρης Οφθαλμολογικός & Διαθλαστικός Έλεγχος',p:'Η βάση για τη διατήρηση της καλής όρασης είναι η έγκαιρη και ακριβής διάγνωση. Πραγματοποιούμε πλήρη διαθλαστικό έλεγχο για τη διόρθωση μυωπίας, υπερμετρωπίας, αστιγματισμού και πρεσβυωπίας, σε ενήλικες και παιδιά. Παράλληλα, εξειδικευόμαστε σε προχωρημένες εξετάσεις όπως η ηλεκτροφυσιολογία της όρασης και η μελέτη οπτικών πεδίων, για μια ολοκληρωμένη χαρτογράφηση της οπτικής λειτουργίας.',tags:['Μυωπία & υπερμετρωπία','Αστιγματισμός','Πρεσβυωπία','Ηλεκτροφυσιολογία','Μελέτη οπτικών πεδίων']},
    en:{t:'Complete Eye & Refractive Assessment',p:'The foundation of good vision is early, accurate diagnosis. We carry out a full refractive assessment to correct myopia, hyperopia, astigmatism and presbyopia, in both adults and children. We also specialise in advanced tests such as visual electrophysiology and visual field studies, for a complete mapping of visual function.',tags:['Myopia & hyperopia','Astigmatism','Presbyopia','Electrophysiology','Visual fields']}},
@@ -887,7 +916,6 @@ function closeLightbox(){document.getElementById('lightbox').classList.remove('o
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLightbox();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLightbox();const m=document.getElementById('mobileNav');if(m.classList.contains('open'))toggleMenu();}});
 
-// Global script to automatically attach zoom functionality to every non-logo image
 function bindZoom(){
   document.querySelectorAll('img:not(.no-zoom)').forEach(img=>{
     img.style.cursor='zoom-in';
